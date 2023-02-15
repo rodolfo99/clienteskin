@@ -1,0 +1,84 @@
+<ul *ngIf="paginas.length > 0" class="pagination">
+  <li class="page-item" *ngIf="paginador.number > 0">
+    <a *ngIf="modulo && busqueda"
+      class="page-link"
+      [routerLink]="['/diccionario/page', paginador.number - 1,busqueda,modulo]"
+      >&laquo;</a>
+      <a *ngIf="modulo && !busqueda"
+      class="page-link"
+      [routerLink]="['/diccionario/page2/mostrarmodulo', paginador.number - 1,modulo]"
+      >&laquo;</a>
+      <a *ngIf="!modulo && busqueda"
+      class="page-link"
+      [routerLink]="['/diccionario/page2/mostrarbusqueda', paginador.number - 1,busqueda]"
+      >&laquo;</a>
+
+  </li>
+  <li class="page-item" [ngClass]="paginador.number == 0?'disabled page-item':'page-item'">
+    <a
+      class="page-link" *ngIf="modulo && busqueda"
+      [routerLink]="['/diccionario/page', 0,busqueda,modulo]"
+      >Primera</a>
+      <a *ngIf="modulo && !busqueda"
+      class="page-link"
+      [routerLink]="['/diccionario/page2/mostrarmodulo', 0,modulo]"
+      >Primera</a>
+      <a *ngIf="!modulo && busqueda"
+      class="page-link"
+      [routerLink]="['/diccionario/page2/mostrarbusqueda', 0,busqueda,modulo]"
+      >Primera</a>
+  </li>
+  <li
+    class="page-item"
+    *ngFor="let pagina of paginas"
+    [ngClass]="pagina - 1 == paginador.number ? 'active' : ''"
+  >
+    <span class="page-link" *ngIf="pagina - 1 == paginador.number">{{
+      pagina
+    }}</span>
+    <a
+      class="page-link"
+      *ngIf="pagina - 1 != paginador.number && busqueda && modulo"
+      [routerLink]="['/diccionario/page', pagina - 1,busqueda,modulo]"
+      >{{ pagina }}</a>
+      <a
+      class="page-link"
+      *ngIf="pagina - 1 != paginador.number && !busqueda && modulo"
+      [routerLink]="['/diccionario/page2/mostrarmodulo', pagina - 1,modulo]"
+      >{{ pagina }}</a>
+
+      <a
+      class="page-link"
+      *ngIf="pagina - 1 != paginador.number && busqueda && !modulo"
+      [routerLink]="['/diccionario/page2/mostrarbusqueda', pagina - 1,busqueda]"
+      >{{ pagina }}</a>
+
+  </li>
+  <li class="page-item" [ngClass]="paginador.number == paginador.totalPages-1?'disabled page-item':'page-item'">
+    <a
+      class="page-link" *ngIf="busqueda && modulo"
+      [routerLink]="['/diccionario/page', paginador.totalPages-1,busqueda,modulo]"
+      >Ultima</a>
+      <a
+      class="page-link" *ngIf="!busqueda && modulo"
+      [routerLink]="['/diccionario/page2/mostrarmodulo', paginador.totalPages-1,modulo]"
+      >Ultima</a>
+      <a
+      class="page-link" *ngIf="busqueda && !modulo"
+      [routerLink]="['/diccionario/page2/mostrarbusqueda', paginador.totalPages-1,busqueda]"
+      >Ultima</a>
+
+  </li>
+  <li class="page-item" *ngIf="paginador.number < paginador.totalPages-1">
+    <a
+      class="page-link" *ngIf="busqueda && modulo"
+      [routerLink]="['/diccionario/page', paginador.number + 1, busqueda,modulo]">&raquo;</a>
+      <a
+      class="page-link" *ngIf="!busqueda && modulo"
+      [routerLink]="['/diccionario/page2/mostrarmodulo', paginador.number + 1,modulo]">&raquo;</a>
+      <a
+      class="page-link" *ngIf="busqueda && !modulo"
+      [routerLink]="['/diccionario/page2/mostrarbusqueda', paginador.number + 1, busqueda]">&raquo;</a>
+
+  </li>
+</ul>

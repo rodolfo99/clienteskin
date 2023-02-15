@@ -1,0 +1,43 @@
+<div class="card border-primary mb-3">
+  <div class="card-header">Etiquetas</div>
+  <p><input type="text" class="form-control" [(ngModel)]="busqueda2" name="busqueda2" />
+    <select name="modulo2" [(ngModel)]="modulo2">
+      <option [value]="item" *ngFor="let item of modulos">{{item}}</option>
+      </select> {{modulo2}}
+    <button class="btn btn-primary" role="button" (click)="mostar_lista()" >Mostrar</button>
+  </p>
+  <div class="card-body text-primary">
+    <h5 class="card-title">Listado de Etiquetas</h5>
+
+    <div *ngIf="diccionarios?.length == 0" class="alert alert-info">
+        No hay registros en la base de datos
+    </div>
+    <table class="table table-bordered table-striped" *ngIf="diccionarios.length>0">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Modulo</th>
+          <th>Formulario</th>
+          <th>Control</th>
+          <th>texto</th>
+          <th>Sustituto</th>
+          <th>Editar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let diccionariox of diccionarios">
+          <td>{{diccionariox.idDic}}</td>
+          <td>{{diccionariox.modulo}}</td>
+          <td>{{diccionariox.formulario}}</td>
+          <td>{{diccionariox.control}}</td>
+          <td>{{diccionariox.texto}}</td>
+          <td>{{diccionariox.sustituto}}</td>
+          <td>
+            <button type="button" name="editar" [routerLink]="['/diccionario/form', diccionariox.idDic]" class="btn btn-primary btn-sm">editar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <app-paginator *ngIf="paginador" [paginador]="paginador" [busqueda]="busqueda" [modulo]="modulo"></app-paginator>
+  </div>
+</div>
